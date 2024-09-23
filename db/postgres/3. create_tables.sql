@@ -2,7 +2,7 @@
 -- Please log an issue at https://github.com/pgadmin-org/pgadmin4/issues/new/choose if you find any bugs, including reproduction steps.
 BEGIN;
 
-USE forecastdata;
+
 CREATE TABLE IF NOT EXISTS public.area
 (
     areaid character varying(36) COLLATE pg_catalog."default" NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS public.publishes
     date_published date,
     date_updated date NOT NULL,
     is_forecast character(1) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT publishes_pkey PRIMARY KEY (inst_instid, indic_indicid, area_areaid)
+    CONSTRAINT publishes_pkey PRIMARY KEY (inst_instid, indic_indicid, area_areaid, date_from, date_until, is_forecast)
 );
 
 ALTER TABLE IF EXISTS public.indicators

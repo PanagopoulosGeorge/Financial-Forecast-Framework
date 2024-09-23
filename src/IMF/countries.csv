@@ -1,0 +1,269 @@
+areaid,name,description
+ABW,Aruba,country
+AFG,Afghanistan,country
+AGO,Angola,country
+AIA,Anguilla,country
+ALB,Albania,country
+ARE,United Arab Emirates,country
+ARG,Argentina,country
+ARM,Armenia,country
+ASM,American Samoa,country
+ATG,Antigua and Barbuda,country
+AUS,Australia,country
+AUT,Austria,country
+AZE,Azerbaijan,country
+BDI,Burundi,country
+BEL,Belgium,country
+BEN,Benin,country
+BFA,Burkina Faso,country
+BGD,Bangladesh,country
+BGR,Bulgaria,country
+BHR,Bahrain,country
+BHS,"Bahamas, The",country
+BIH,Bosnia and Herzegovina,country
+BLR,Belarus,country
+BLZ,Belize,country
+BMU,Bermuda,country
+BOL,Bolivia,country
+BRA,Brazil,country
+BRB,Barbados,country
+BRN,Brunei Darussalam,country
+BTN,Bhutan,country
+BWA,Botswana,country
+CAF,Central African Republic,country
+CAN,Canada,country
+CHE,Switzerland,country
+CHI,Channel Islands,country
+CHL,Chile,country
+CHN,"China, People's Republic of",country
+CIV,Côte d'Ivoire,country
+CMR,Cameroon,country
+COD,"Congo, Dem. Rep. of the",country
+COG,"Congo, Republic of ",country
+COK,Cook Islands,country
+COL,Colombia,country
+COM,Comoros,country
+CPV,Cabo Verde,country
+CRI,Costa Rica,country
+CUB,Cuba,country
+CYM,Cayman Islands,country
+CYP,Cyprus,country
+CZE,Czech Republic,country
+DEU,Germany,country
+DJI,Djibouti,country
+DMA,Dominica,country
+DNK,Denmark,country
+DOM,Dominican Republic,country
+DZA,Algeria,country
+ECU,Ecuador,country
+EGY,Egypt,country
+ERI,Eritrea,country
+ESH,Western Sahara,country
+ESP,Spain,country
+EST,Estonia,country
+ETH,Ethiopia,country
+FIN,Finland,country
+FJI,Fiji,country
+FLK,Falkland Islands,country
+FRA,France,country
+FRO,Faeroe Islands,country
+FSM,"Micronesia, Fed. States of",country
+GAB,Gabon,country
+GBR,United Kingdom,country
+GEO,Georgia,country
+GHA,Ghana,country
+GIB,Gibraltar,country
+GIN,Guinea,country
+GLP,Guadeloupe,country
+GMB,"Gambia, The",country
+GNB,Guinea-Bissau,country
+GNQ,Equatorial Guinea,country
+GRC,Greece,country
+GRD,Grenada,country
+GRL,Greenland,country
+GTM,Guatemala,country
+GUF,French Guiana,country
+GUM,Guam,country
+GUY,Guyana,country
+HKG,Hong Kong SAR,country
+HND,Honduras,country
+HRV,Croatia,country
+HTI,Haiti,country
+HUN,Hungary,country
+IDN,Indonesia,country
+IMY,Isle of Man,country
+IND,India,country
+IRL,Ireland,country
+IRN,Iran,country
+IRQ,Iraq,country
+ISL,Iceland,country
+ISR,Israel,country
+ITA,Italy,country
+JAM,Jamaica,country
+JOR,Jordan,country
+JPN,Japan,country
+KAZ,Kazakhstan,country
+KEN,Kenya,country
+KGZ,Kyrgyz Republic,country
+KHM,Cambodia,country
+KIR,Kiribati,country
+KNA,Saint Kitts and Nevis,country
+KOR,"Korea, Republic of",country
+KWT,Kuwait,country
+LAO,Lao P.D.R.,country
+LBN,Lebanon,country
+LBR,Liberia,country
+LBY,Libya,country
+LCA,Saint Lucia,country
+LIE,Liechtenstein,country
+LKA,Sri Lanka,country
+LSO,Lesotho,country
+LTU,Lithuania,country
+LUX,Luxembourg,country
+LVA,Latvia,country
+MAC,Macao SAR,country
+MAR,Morocco,country
+MCO,Monaco,country
+MDA,Moldova,country
+MDG,Madagascar,country
+MDV,Maldives,country
+MEX,Mexico,country
+MHL,Marshall Islands,country
+MKD,North Macedonia ,country
+MLI,Mali,country
+MLT,Malta,country
+MMR,Myanmar,country
+MNE,Montenegro,country
+MNG,Mongolia,country
+MNP,Northern Mariana Islands,country
+MOZ,Mozambique,country
+MRT,Mauritania,country
+MSR,Montserrat,country
+MTQ,Martinique,country
+MUS,Mauritius,country
+MWI,Malawi,country
+MYS,Malaysia,country
+MYT,Mayotte,country
+NAM,Namibia,country
+NCL,New Caledonia,country
+NER,Niger,country
+NGA,Nigeria,country
+NIC,Nicaragua,country
+NIU,Niue,country
+NLD,Netherlands,country
+NOR,Norway,country
+NPL,Nepal,country
+NRU,Nauru,country
+NZL,New Zealand,country
+OMN,Oman,country
+PAK,Pakistan,country
+PAN,Panama,country
+PCN,Pitcairn,country
+PER,Peru,country
+PHL,Philippines,country
+PLW,Palau,country
+PNG,Papua New Guinea,country
+POL,Poland,country
+PRI,Puerto Rico,country
+PRK,"Korea, Dem. People's Rep. of",country
+PRT,Portugal,country
+PRY,Paraguay,country
+PYF,French Polynesia,country
+QAT,Qatar,country
+REU,Reunion,country
+ROU,Romania,country
+RUS,Russian Federation,country
+RWA,Rwanda,country
+SAU,Saudi Arabia,country
+SDN,Sudan,country
+SEN,Senegal,country
+SGP,Singapore,country
+SHN,Saint Helena,country
+SJM,Svalbard and Jan Mayen Islands,country
+SLB,Solomon Islands,country
+SLE,Sierra Leone,country
+SLV,El Salvador,country
+SMR,San Marino,country
+SOM,Somalia,country
+SPM,Saint-Pierre and Miquelon,country
+SRB,Serbia,country
+STP,São Tomé and Príncipe,country
+SUR,Suriname,country
+SVK,Slovak Republic,country
+SVN,Slovenia,country
+SWE,Sweden,country
+SWZ,Eswatini,country
+SYC,Seychelles,country
+SYR,Syria,country
+TCA,Turks and Caicos Islands,country
+TCD,Chad,country
+TGO,Togo,country
+THA,Thailand,country
+TJK,Tajikistan,country
+TKL,Tokelau,country
+TKM,Turkmenistan,country
+TLS,Timor-Leste,country
+TON,Tonga,country
+TTO,Trinidad and Tobago,country
+TUN,Tunisia,country
+TUR,"Türkiye, Republic of",country
+TUV,Tuvalu,country
+TWN,Taiwan Province of China,country
+TZA,Tanzania,country
+UGA,Uganda,country
+UKR,Ukraine,country
+URY,Uruguay,country
+USA,United States,country
+UZB,Uzbekistan,country
+VAT,Holy See,country
+VCT,Saint Vincent and the Grenadines,country
+VEN,Venezuela,country
+VGB,British Virgin Islands,country
+VIR,United States Virgin Islands ,country
+VNM,Vietnam,country
+VUT,Vanuatu,country
+WBG,West Bank and Gaza,country
+WLF,Wallis and Futuna Islands,country
+WSM,Samoa,country
+YEM,Yemen,country
+ZAF,South Africa,country
+ZMB,Zambia,country
+ZWE,Zimbabwe,country
+SSD,"South Sudan, Republic of",country
+CUW,Curacao,country
+MFX,Saint Martin,country
+SXM,Sint Maarten,country
+ATI,,country
+ATL,,country
+AND,Andorra,country
+IOT,British Indian Ocean Territories,country
+BES,"Bonaire, Sint Eustatius and Saba",country
+KOS,Kosovo,country
+UVK,Kosovo,country
+AFQ,Africa (Region),region
+AFRREO,African Regional Economic Outlook,region
+APQ,Asia and Pacific,region
+AZQ,Australia and New Zealand,region
+CAQ,Central Asia and the Caucasus,region
+CBQ,Caribbean,region
+CMQ,Central America,region
+EAQ,East Asia,region
+EEQ,Eastern Europe ,region
+EUQ,Europe,region
+MEQ,Middle East (Region),region
+NAQ,North Africa,region
+NMQ,North America,region
+PIQ,Pacific Islands ,region
+SAQ,South Asia,region
+SEQ,Southeast Asia,region
+SMQ,South America,region
+SSQ,Sub-Saharan Africa (Region) ,region
+WEQ,Western Europe,region
+WHQ,Western Hemisphere (Region),region
+AFR_SSQ,Sub-Saharan Africa (Region) ,region
+SPR_GD_MECA,Middle East and Central Asia,region
+SPR_GD_EUR,Europe,region
+SPR_GD_AFR,Africa,region
+SPR_GD_CPI,Caribbean and Pacific Islands,region
+SPR_GD_WHD,Western Hemisphere,region
+SPR_GD_Asia,Asia,region

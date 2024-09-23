@@ -1,28 +1,24 @@
 # Financial Forecasting Data Management Framework
 
-#### This project showcases an effort to design and develop a framework for managing and analyzing financial forecasting data. My endeavor to create a system for gathering, preserving, and organizing data associated with economic indicator forecasts requires segmentation into distinct components, each fulfilling a specific function.
+** This project showcases an effort to design and develop a framework for managing and analyzing economic projections (such  as  GDP, headline inflation e.t.c) published by Financial institutions such as Banks and organizations like OECD and IMF. My endeavor to create a system for gathering and organizing data associated with economic indicator forecasts (and real measurements of the indicators) requires segmentation into distinct components, each fulfilling a specific function.**
 
-> Specifically, the need to organize and compare financial forecast data from various sources, along with real indicator prices, highlights the importance for a programming tool that can interface with these sources and scrape the necessary data. Subsequently, this data must be extracted, transformed, and loaded into a database for subsequent analysis.
-
-
+> Data from various sources (projections and real prices) will be extracted and loaded into a database for subsequent analysis.
 
 ## Main Pillars of the System
 
-The system architecture is divided into four main components:
+The system architecture is divided into 3 main components:
 
 ### 1. Database Management Storage
 
-The system will use **PostgreSQL** as the **database management system** (DBMS) to efficiently store financial forecast data. PostgreSQL is chosen for its robustness, scalability, and strong support for complex queries and transactions.
+The system will use **PostgreSQL** as the **database management system** (DBMS) to store financial forecast data. PostgreSQL is chosen for its robustness and scalability as well as Timescale, which is a version of Postgres focused on storing time series data.
 
-### 2. Web Scraping Environment
+### 2. Web Scraping - DB Loading Environment
 
 The web scraping environment will be implemented using **Requests** and if needed, **Scrapy**. These tools allow for effective extraction of financial forecast data from various online sources. **Requests** is suitable for straightforward HTTP requests which is most of the cases when dealing with financial data, while **Scrapy** offers a more advanced framework for large-scale, structured data scraping.
 
-### 3. ETL /ELT Mechanism
-
 The **ETL process** (Extract, Transform, Load) will be developed using **Python** and **SQL**  to standardize and process data from multiple sources. The extracted data will be loaded into the database in their original format. Additional views or mechanisms can be created to transform and standardize data.
 
-### 4. User Interface and Visualization Tool (OPTIONAL)
+### 3. User Interface and Visualization Tool (OPTIONAL)
 
 A **Django web application** will serve as the user interface and visualization tool, allowing end users to interact with the stored data. Django is selected due to its ease of integration with databases, built-in admin capabilities, and scalability for web development, ensuring efficient management of the system.
 
@@ -45,3 +41,13 @@ These represent the regions for which the economic indicators are reported or pr
 Based on the requirements here is a prototype of the ER diagram:
 
 ![1726680307518](images/README/1726680307518.png)
+
+## Data Sources
+
+### OECD (API documentation [here](https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf))
+
+The \*\*OECD\*\* provides a wealth of economic data used in this project for financial forecasting. Data such as GDP growth, inflation rates, and employment statistics will be obtained using the \*\*OECD Data API\*\*, which supports RESTful queries in formats like JSON, XML, and CSV.
+
+### IMF (API documentation [here](https://www.imf.org/external/datamapper/api/help))
+
+The \*\*International Monetary Fund (IMF)\*\* is another critical data provider. The IMF offers extensive economic data through its \*\*DataMapper API\*\*, enabling retrieval of time-series data related to global economic indicators.

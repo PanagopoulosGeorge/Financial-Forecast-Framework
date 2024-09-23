@@ -1,0 +1,6 @@
+2024-09-23 19:46:30,974 - INFO -   ############ Starting load_measures function  ############ 
+2024-09-23 19:46:30,974 - INFO - institute: OECD
+2024-09-23 19:46:33,010 - INFO - Number of records before filtering: 847454
+2024-09-23 19:46:33,448 - INFO - Number of records after filtering: 0
+2024-09-23 19:46:33,486 - INFO - Data insertion completed
+2024-09-23 19:46:33,486 - INFO -   ############ Ending load_measures function  ############ 
