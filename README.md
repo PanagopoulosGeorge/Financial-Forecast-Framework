@@ -1,8 +1,23 @@
 # Financial Forecasting Data Management Framework
 
-** This project showcases an effort to design and develop a framework for managing and analyzing economic projections (such  as  GDP, headline inflation e.t.c) published by Financial institutions such as Banks and organizations like OECD and IMF. My endeavor to create a system for gathering and organizing data associated with economic indicator forecasts (and real measurements of the indicators) requires segmentation into distinct components, each fulfilling a specific function.**
+** This project showcases an effort to d****esign and develop a framework for managing and analyzing economic projections (such  as  GDP, headline inflation e.t.c) published by Financial institutions such as Banks and organizations like OECD and IMF. My endeavor to create a system for gathering and organizing data associated with economic indicator forecasts (and real measurements of the indicators) requires segmentation into distinct components, each fulfilling a specific function.**
 
 > Data from various sources (projections and real prices) will be extracted and loaded into a database for subsequent analysis.
+
+## Installation
+
+1. Install postgresql
+2. Execute the scripts in install folder in order to create database, db user, db tables and insert institutions, countries and indicators.
+3. **Clone the repository | Create virtual environment:**
+
+   ```sh
+   git clone https://github.com/PanagopoulosGeorge/Financial-Forecast-Framework.git
+   cd Financial-Forecast-Framework
+   python -m venv venv
+   venv\Scripts\activate.bat #source venv/bin/activate on Linux
+   pip install -r requirements.txt
+   ```
+
 
 ## Main Pillars of the System
 

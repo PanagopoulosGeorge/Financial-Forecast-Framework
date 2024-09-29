@@ -25,7 +25,14 @@ class IMFDataLoader:
         for symbol in jsondata.keys():
             df = self.unpack_symbol(jsondata, symbol)
             data = pd.concat([data, df], ignore_index=True)
-        return data
+        data = data.assign(
+            date_from=pd.to_datetime(data["date_from"])
+        )
+        data = data.assign(
+            date_until = pd.to_datetime(data["date_from"]) + pd.DateOffset(months=12),
+            date_updated = pd.to_datetime("now"),
+        )
+        return data.reset_index(drop=True)
 
     def update_forecast_status(self, date=None):
         """ last_historical_date.txt file contains the last date for which we have actual historical recorded data.
@@ -54,3 +61,4 @@ if __name__ == "__main__":
     print(df[['inst_instid', "indic_indicid", "area_areaid", "date_from", "is_forecast"]].head())
     print(df.shape)
     print(df[['inst_instid', "indic_indicid", "area_areaid", "date_from", "is_forecast"]].tail())
+    df.to_csv('DATA_IMF.csv', index=False)

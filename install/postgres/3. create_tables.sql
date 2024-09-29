@@ -14,10 +14,11 @@ CREATE TABLE IF NOT EXISTS public.area
 CREATE TABLE IF NOT EXISTS public.indicators
 (
     inst_instid character varying(8) COLLATE pg_catalog."default" NOT NULL,
-    indicid character varying(8) COLLATE pg_catalog."default" NOT NULL,
+    indicid character varying(32) COLLATE pg_catalog."default" NOT NULL,
     name character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    abbreviation character varying(8) COLLATE pg_catalog."default" NOT NULL,
+    abbreviation character varying(32) COLLATE pg_catalog."default" NOT NULL,
     unit_measure character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    description text COLLATE pg_catalog."default",
     CONSTRAINT indicators_pkey PRIMARY KEY (indicid, inst_instid)
 );
 
@@ -36,7 +37,7 @@ CREATE TABLE IF NOT EXISTS public.institutions
 CREATE TABLE IF NOT EXISTS public.publishes
 (
     inst_instid character varying(8) COLLATE pg_catalog."default" NOT NULL,
-    indic_indicid character varying(8) COLLATE pg_catalog."default" NOT NULL,
+    indic_indicid character varying(36) COLLATE pg_catalog."default" NOT NULL,
     area_areaid character varying(36) COLLATE pg_catalog."default" NOT NULL,
     value numeric NOT NULL,
     value_normalized numeric,
@@ -62,12 +63,5 @@ ALTER TABLE IF EXISTS public.publishes
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.publishes
-    ADD CONSTRAINT publishes_indicators_fkey FOREIGN KEY (indic_indicid, inst_instid)
-    REFERENCES public.indicators (indicid, inst_instid) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION;
 
 END;

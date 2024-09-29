@@ -2,7 +2,7 @@ import requests
 import sys
 from .urls import IMF_BASE_ENDPOINT
 from datetime import datetime
-from src.DB_loader import get_indicator_symbols
+from src.database import get_indicator_symbols
 HELP ="""
 This script is used to access the IMF API and download data from the IMF Economic outlook.
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     IMF_indicators = get_indicator_symbols("IMF")
     data = {}
     for indicator in IMF_indicators:
-        endpoint = IMF_BASE_ENDPOINT + indicator
+        endpoint = IMF_BASE_ENDPOINT + indicator 
         indicator_data = fetch_imf_data(endpoint)
         indicator_data = indicator_data['values']
         data = {**data, **indicator_data}

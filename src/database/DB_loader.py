@@ -4,10 +4,12 @@
 from src.config import load_config_db, get_connection_string
 from src.OECD.countries import country_codes
 from src.OECD.loader import OECDDataLoader
+from src.IMF.loader import IMFDataLoader
 import psycopg2
 import logging
 from sqlalchemy import create_engine, text
 import pandas as pd
+import sys
 
 logging.basicConfig(
     level=logging.INFO,
@@ -75,14 +77,23 @@ def load_measures(data = "data/OECD_data.csv", engine = get_sqlalchemy_engine(),
     logger.info("institute: " + institute)
     if institute =='OECD':
         loader = OECDDataLoader(data)
+    elif institute == 'IMF':
+        loader = IMFDataLoader(data)
+    else:
+        logger.error("Institute not recognized")
+        sys.exit(1)
     data = loader.load_data()
-    indicators = get_indicator_symbols('OECD')
+
+    indicators = get_indicator_symbols(institute)
     areas = get_areas()
     logger.info("Number of records before filtering: " + f"{len(data)}")
     with engine.connect() as conn:
         data = data[data["indic_indicid"].isin(indicators)]
         data = data[data["area_areaid"].isin(areas)]
-        existing_forecasts = pd.read_sql("SELECT inst_instid,indic_indicid, area_areaid, date_from, date_until, is_forecast FROM publishes", conn)
+        existing_forecasts = pd.read_sql("SELECT inst_instid,indic_indicid, area_areaid, date_from, date_until, is_forecast FROM publishes WHERE inst_instid=%s", 
+        conn,
+        params=(institute,))
+        print(existing_forecasts.shape)
         data['date_from'] = pd.to_datetime(data['date_from']).dt.date
         data['date_until'] = pd.to_datetime(data['date_until']).dt.date
         existing_forecasts['date_from'] = pd.to_datetime(existing_forecasts['date_from']).dt.date
@@ -92,6 +103,9 @@ def load_measures(data = "data/OECD_data.csv", engine = get_sqlalchemy_engine(),
         data = data[data['_merge']=='left_only'].drop(columns=['_merge'])
         rows = [tuple(row) for row in data.values]
         logging.info("Number of records after filtering: " + f"{len(rows)}")
+        if len(rows) == 0:
+            logging.info("No new data to insert. Exiting.")
+            return
     conn = connect_to_db()
     with conn.cursor() as cur:
         cur.executemany(
@@ -104,4 +118,4 @@ def load_measures(data = "data/OECD_data.csv", engine = get_sqlalchemy_engine(),
     logger.info("  ############ Ending load_measures process  ############ ")
 
 if __name__ == '__main__':
-    load_measures()
+    load_measures(data = "data/IMF_data.json", institute = 'IMF')

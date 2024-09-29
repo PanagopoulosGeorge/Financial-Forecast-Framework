@@ -1,27 +1,7 @@
 import requests 
 import sys
-from datetime import datetime
-from src.IMF.urls import IMF_BASE_ENDPOINT
-from src.IMF.IMF_download import fetch_imf_data
 import pandas as pd
 from src.DB_loader import get_sqlalchemy_engine
-
-def convert_to_dataframe(data):
-    rows = []
-    for indicator_id, details in data.items():
-        row = {'indicator_id': indicator_id}
-        row.update(details)
-        rows.append(row)
-    df = pd.DataFrame(rows)
-    return df
-
-def load_indicators():
-    indicators = pd.read_csv('src/IMF/IMF_indicators.csv')
-    return indicators
-
-def load_countries():
-    countries = pd.read_csv('src/IMF/countries.csv')
-    return countries
 
 def append_countries_to_db():
     data = load_countries()
