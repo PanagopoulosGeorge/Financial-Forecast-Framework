@@ -1,14 +1,20 @@
 # Financial Forecasting Data Management Framework
 
-** This project showcases an effort to d****esign and develop a framework for managing and analyzing economic projections (such  as  GDP, headline inflation e.t.c) published by Financial institutions such as Banks and organizations like OECD and IMF. My endeavor to create a system for gathering and organizing data associated with economic indicator forecasts (and real measurements of the indicators) requires segmentation into distinct components, each fulfilling a specific function.**
+This project showcases an effort to design and develop a framework for managing and analyzing economic projections (such  as  GDP, headline inflation e.t.c) published by Financial institutions such as Banks and organizations like OECD and IMF. My endeavor to create a system for gathering and organizing data associated with economic indicator forecasts (and real measurements of the indicators) requires segmentation into distinct components, each fulfilling a specific function.
 
 > Data from various sources (projections and real prices) will be extracted and loaded into a database for subsequent analysis.
 
 ## Installation
 
 1. Install postgresql
+
+   * **Install PostgreSQL:**
+     - Download and install PostgreSQL from [here](https://www.postgresql.org/download/).
+   * **Set Up the Database:**
+     - Execute the scripts in the `install` folder in the following order to create the database, database user, database tables, and insert institutions, countries, and indicators.
 2. Execute the scripts in install folder in order to create database, db user, db tables and insert institutions, countries and indicators.
-3. **Clone the repository | Create virtual environment:**
+3. Update `config.ini` within `conf` folder.
+4. **Clone the repository | Create virtual environment:**
 
    ```sh
    git clone https://github.com/PanagopoulosGeorge/Financial-Forecast-Framework.git
@@ -17,7 +23,6 @@
    venv\Scripts\activate.bat #source venv/bin/activate on Linux
    pip install -r requirements.txt
    ```
-
 
 ## Main Pillars of the System
 
@@ -66,3 +71,13 @@ The \*\*OECD\*\* provides a wealth of economic data used in this project for fin
 ### IMF (API documentation [here](https://www.imf.org/external/datamapper/api/help))
 
 The \*\*International Monetary Fund (IMF)\*\* is another critical data provider. The IMF offers extensive economic data through its \*\*DataMapper API\*\*, enabling retrieval of time-series data related to global economic indicators.
+
+## License
+
+Copyright (c) [2024] [George Panagopoulos]
+
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software.
