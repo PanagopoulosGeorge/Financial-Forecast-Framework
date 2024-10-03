@@ -1,1 +1,0 @@
-from DB_loader import get_indicator_symbols

@@ -64,4 +64,11 @@ ALTER TABLE IF EXISTS public.publishes
     ON DELETE NO ACTION
     NOT VALID;
 
+ALTER TABLE IF EXISTS public.publishes
+    ADD CONSTRAINT publishes_indicators_indicid_fkey FOREIGN KEY (inst_instid, indic_indicid)
+    REFERENCES public.indicators (inst_instid,indicid) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
 END;

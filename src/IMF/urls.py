@@ -1,1 +1,0 @@
-IMF_BASE_ENDPOINT ="https://www.imf.org/external/datamapper/api/v1/"
