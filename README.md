@@ -43,7 +43,7 @@ This project showcases an effort to design and develop a framework for managing 
    - Activate the virtual environment:
      - On Windows:
        ```sh
-       venv\Scripts\activate
+       venv\Scripts\activate.bat
        ```
      - On macOS/Linux:
        ```sh
