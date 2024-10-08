@@ -84,7 +84,7 @@ This project showcases an effort to design and develop a framework for managing 
         * Navigate to conf folder and modify the .ini file using the credentials.
 6. **Run Migrations**
 
-   - Navigate to the `src` directory:
+   - Navigate to the `src` directory after opening a terminal or cmd within Financial-Forecast-Framework folder:
      ```sh
      cd src
      ```
