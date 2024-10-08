@@ -1,28 +1,12 @@
 # Financial Forecasting Data Management Framework
 
-This project showcases an effort to design and develop a framework for managing and analyzing economic projections (such  as  GDP, headline inflation e.t.c) published by Financial institutions such as Banks and organizations like OECD and IMF. My endeavor to create a system for gathering and organizing data associated with economic indicator forecasts (and real measurements of the indicators) requires segmentation into distinct components, each fulfilling a specific function.
+## Introduction
 
-> Data from various sources (projections and real prices) will be extracted and loaded into a database for subsequent analysis.
+This project is a framework designed to manage analyze and assess economic projections, such as GDP and inflation, published by financial institutions like banks, as well as organizations like OECD and IMF. The system extracts data, processes it, and stores it in a PostgreSQL database for further analysis.
+
+> The system gathers economic forecast data from various APIs, transforming and loading it into the database.
 
 ## Installation
-
-1. Install postgresql
-
-   * **Install PostgreSQL:**
-     - Download and install PostgreSQL from [here](https://www.postgresql.org/download/).
-   * **Set Up the Database:**
-     - Execute the scripts in the `install` folder in the following order to create the database, database user, database tables, and insert institutions, countries, and indicators.
-2. Execute the scripts in install folder in order to create database, db user, db tables and insert institutions, countries and indicators.
-3. Update `config.ini` within `conf` folder.
-4. **Clone the repository | Create virtual environment:**
-
-   ```sh
-   git clone https://github.com/PanagopoulosGeorge/Financial-Forecast-Framework.git
-   cd Financial-Forecast-Framework
-   python -m venv venv
-   venv\Scripts\activate.bat #source venv/bin/activate on Linux
-   pip install -r requirements.txt
-   ```
 
 ## Main Pillars of the System
 

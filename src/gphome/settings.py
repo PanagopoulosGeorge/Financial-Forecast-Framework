@@ -6,6 +6,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ###############################################################################################
 #                                   ADDED CODE                                                #
 ###############################################################################################
+ENDPOINTS = {
+    "OECD": {"publications": "https://sdmx.oecd.org/public/rest/data/OECD.ECO.MAD,DSD_EO@DF_EO", 
+             "historical_points": "https://dotstat-search.oecd.org/api/search?tenant=oecd"
+            },
+    "IMF": {"publications": "https://www.imf.org/external/datamapper/api/v1/"},
+    "WORLD_BANK": {"publications": None},
+}
 try:
     config = ConfigParser()
     config.read(Path(BASE_DIR).joinpath('conf/config.ini'))
@@ -15,6 +22,36 @@ except Exception as e:
 
 DATABASE_URL = config['database']['DATABASE_URL']
 CONN_MAX_AGE = int(config['database']['CONN_MAX_AGE'])
+###############################################################################################
+
+
+###############################################################################################
+#                                   ADDED CODE                                                #
+###############################################################################################
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'etl/logs/extract.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'etl': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
 ###############################################################################################
 
 # SECURITY WARNING: keep the secret key used in production secret!

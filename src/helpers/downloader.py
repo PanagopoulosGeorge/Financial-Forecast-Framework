@@ -10,8 +10,11 @@ def download_local(url: str, out_path: Path, parent_mkdir: bool) -> bool:
     try:
         response = requests.get(url)
         response.raise_for_status()
-        response.write_bytes(out_path)
-        return True
     except requests.exceptions.RequestException as e:
         raise ValueError(f"Error downloading {url}: {e}")
         return False
+
+    with open(out_path, 'wb') as f:
+        data = response.content
+        f.write(data)
+    return True

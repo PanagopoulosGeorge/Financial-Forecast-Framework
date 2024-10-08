@@ -1,4 +1,4 @@
-"inst_instid","indicid","name","abbreviation","unit_measure","description"
+inst_instid,indicid,name,abbreviation,unit_measure,description
 "OECD","GDP","Gross domestic product, nominal value, market prices","GDP","National currency",NULL
 "OECD","GDP_USD","Gross domestic product, nominal value in USD, OECD reference year exchange rates","GDP_USD","USD",NULL
 "OECD","GDPV","Gross domestic product, volume, market prices","GDPV","National currency",NULL
