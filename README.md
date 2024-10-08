@@ -100,6 +100,12 @@ This project showcases an effort to design and develop a framework for managing 
      python manage.py makemigrations
      python manage.py migrate
      ```
+7. **Create a superuser for admin site**
+
+   - Navigate to the `src` directory after opening a terminal or cmd within Financial-Forecast-Framework folder:
+     ```sh
+     python manage.py migrate
+     ```
 
 ## Usage
 
