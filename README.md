@@ -85,6 +85,7 @@ This project showcases an effort to design and develop a framework for managing 
 
           ```sql
           psql -U db2test -d finforecastdata
+          \i '4. create_tables.sql'
           ```
      4. **Configure the .ini file**
         * Navigate to conf folder and modify the .ini file using the credentials.
