@@ -164,7 +164,7 @@ These represent the regions for which the economic indicators are reported or pr
 
 Based on the requirements here is a prototype of the ER diagram:
 
-    ![1726680307518](images/README/1726680307518.png)
+![1726680307518](images/README/1726680307518.png)
 
 
 ## License
