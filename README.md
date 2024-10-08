@@ -106,6 +106,14 @@ This project showcases an effort to design and develop a framework for managing 
      ```sh
      python manage.py migrate
      ```
+7. **Import initial institutions, indicators, and geographies.**
+
+   - Navigate to the `src` directory after opening a terminal or cmd within Financial-Forecast-Framework folder:
+     ```sh
+     python manage.py installation_import_institutions
+     python manage.py installation_import_indicators
+     python manage.py installation_import_areas
+     ```
 
 ## Usage
 
