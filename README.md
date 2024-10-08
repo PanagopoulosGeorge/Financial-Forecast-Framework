@@ -80,6 +80,12 @@ This project showcases an effort to design and develop a framework for managing 
           ```sql
           \i '3. grant_priviledge.sql'
           ```
+     4. **Create talbes**:
+        - Run the following command to create the main database tables. Ajdust the user and db name if changed before.
+
+          ```sql
+          psql -U db2test -d finforecastdata
+          ```
      4. **Configure the .ini file**
         * Navigate to conf folder and modify the .ini file using the credentials.
 6. **Run Migrations**
