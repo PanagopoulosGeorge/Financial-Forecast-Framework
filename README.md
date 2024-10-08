@@ -116,7 +116,20 @@ This project showcases an effort to design and develop a framework for managing 
      ```
 
 ## Usage
-
+There are 3 main custom commands:
+     ```sh
+     python manage.py extract
+     python manage.py transform
+     python manage.py load
+     ```
+which perform the main ETL operation.
+If you want to create a custom data source:
+- Create a new folder `custom` or `<name of the institution>` within `data` directory and place a file named `data_transformed.csv'. The format must follow: `(inst_instid,indic_indicid,area_areaid,value,value_normalized,date_from,date_until,date_published,date_updated,is_forecast)`
+- Register the institution if it does not currently exists through the admin site, using the superuser created.
+- run:
+    ```sh
+     python manage.py load
+     ```
 ## Project Structure
 
 The system architecture is divided into 3 main components:
