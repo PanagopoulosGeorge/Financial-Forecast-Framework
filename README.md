@@ -124,7 +124,7 @@ There are 3 main custom commands:
      ```
 which perform the main ETL operation.
 If you want to create a custom data source:
-- Create a new folder `custom` or `<name of the institution>` within `data` directory and place a file named `data_transformed.csv'. The format must follow: `(inst_instid,indic_indicid,area_areaid,value,value_normalized,date_from,date_until,date_published,date_updated,is_forecast)`
+- Create a new folder `custom` or `<name of the institution>` within `data` directory and place a file named `data_transformed.csv`. The format must follow: `(inst_instid,indic_indicid,area_areaid,value,value_normalized,date_from,date_until,date_published,date_updated,is_forecast)`
 - Register the institution if it does not currently exists through the admin site, using the superuser created.
 - run:
     ```sh
