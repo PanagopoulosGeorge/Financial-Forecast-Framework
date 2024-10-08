@@ -67,18 +67,18 @@ This project showcases an effort to design and develop a framework for managing 
         - Change the password before executing the following script.
         - Run the following command to create a new user:
           ```sql
-          \i install/postgres/1.create_user.sql
+          \i '1. create_user.sql'
           ```
      2. **Create Database**:
         - Run the following command to create a new database:
           ```sql
-          \i install/postgres/2.create_database.sql
+          \i '2. create_database.sql'
           ```
      3. **Grant Privileges**:
         - Run the following command to grant necessary privileges to the user:
 
           ```sql
-          \i install/postgres/3.grant_priviledge.sql
+          \i '3. grant_priviledge.sql'
           ```
      4. **Configure the .ini file**
         * Navigate to conf folder and modify the .ini file using the credentials.
