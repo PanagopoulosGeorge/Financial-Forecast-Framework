@@ -60,6 +60,9 @@ This project showcases an effort to design and develop a framework for managing 
    - Execute the scripts in the `install/postgres` folder in the following order to create the database, database user, and grant necessary privileges:
      1. **Create User**:
         - Open the PostgreSQL command line interface (psql) or any PostgreSQL client.
+           ```sql
+          psql -U postgres
+          ```
         - Change the password before executing the following script.
         - Run the following command to create a new user:
           ```sql
