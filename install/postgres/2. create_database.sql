@@ -1,3 +1,3 @@
-CREATE DATABASE forecastdata ENCODING 'UTF8' OWNER db1test;
+CREATE DATABASE finforecastdata ENCODING 'UTF8' OWNER db2test;
 
 
