@@ -9,11 +9,6 @@ This project showcases an effort to design and develop a framework for managing 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Database Setup](#database-setup)
-- [Running the Project](#running-the-project)
-- [Testing](#testing)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
@@ -80,6 +75,13 @@ This project showcases an effort to design and develop a framework for managing 
           ```sql
           \i '3. grant_priviledge.sql'
           ```
+     4. **Create talbes**:
+        - Run the following command to create the main database tables. Ajdust the user and db name if changed before.
+
+          ```sql
+          psql -U db2test -d finforecastdata
+          \i '4. create_tables.sql'
+          ```
      4. **Configure the .ini file**
         * Navigate to conf folder and modify the .ini file using the credentials.
 6. **Run Migrations**
@@ -93,9 +95,36 @@ This project showcases an effort to design and develop a framework for managing 
      python manage.py makemigrations
      python manage.py migrate
      ```
+7. **Create a superuser for admin site**
+
+   - Navigate to the `src` directory after opening a terminal or cmd within Financial-Forecast-Framework folder:
+     ```sh
+     python manage.py migrate
+     ```
+7. **Import initial institutions, indicators, and geographies.**
+
+   - Navigate to the `src` directory after opening a terminal or cmd within Financial-Forecast-Framework folder:
+     ```sh
+     python manage.py installation_import_institutions
+     python manage.py installation_import_indicators
+     python manage.py installation_import_areas
+     ```
 
 ## Usage
-
+There are 3 main custom commands:
+  ```sh
+  python manage.py extract
+  python manage.py transform
+  python manage.py load
+  ```
+which perform the main ETL operation.
+If you want to create a custom data source:
+- Create a new folder `custom` or `<name of the institution>` within `data` directory and place a file named `data_transformed.csv`. The format must follow: `(inst_instid,indic_indicid,area_areaid,value,value_normalized,date_from,date_until,date_published,date_updated,is_forecast)`
+- Register the institution if it does not currently exists through the admin site, using the superuser created.
+- run:
+    ```sh
+     python manage.py load
+     ```
 ## Project Structure
 
 The system architecture is divided into 3 main components:
@@ -130,7 +159,7 @@ These represent the regions for which the economic indicators are reported or pr
 
 Based on the requirements here is a prototype of the ER diagram:
 
-    ![1726680307518](images/README/1726680307518.png)
+![1726680307518](images/README/1726680307518.png)
 
 
 ## License
@@ -138,20 +167,10 @@ Based on the requirements here is a prototype of the ER diagram:
 
 *MIT License*
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Copyright (c) 2024 George Panagopoulos
 
-*The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.*
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
