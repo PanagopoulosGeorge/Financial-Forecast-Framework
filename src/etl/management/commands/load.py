@@ -18,7 +18,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         self.logger = self.setup_logger()
-        data_sources = {str(f).split('\\')[-1].upper(): f / self.FILENAME for f in DATA_DIR.iterdir() if f.is_dir()}
+        data_sources = {
+                        f.name.upper(): f / self.FILENAME
+                        for f in DATA_DIR.iterdir() if f.is_dir()}
         print(data_sources)
         for institution in data_sources:
             self.logger.info(f"Loading data for {institution}")
