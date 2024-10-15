@@ -9,56 +9,59 @@ class DataLoader:
 
     def __init__(self, data_path, parent_institution):
         self.data_path = data_path
-        self.parent_institution = self.__get_parent_institution(parent_institution)
+        self.parent_institution = self.__get_parent_institution(parent_institution).instid
         self.data = pd.read_csv(self.data_path)
 
     def load(self) -> bool:
-        # Make a copy of the data for importing
-        data_for_import = self.data.copy()
-
-        # Fetch existing data from the database
-        existing_publications = self.__get_existing_publications_df()
+        """
+        This method is the main entry point for the DataLoader class. It will load the data from the CSV file and insert it into the database.
+        """
+        print("#############################################################################################################")
+        print(f"Initialize loading process for institution {self.parent_institution}.")
+        print("Initial data shape: ", self.data.shape)
+        # drop rows with missing values in the following columns
+        self.data = self.data.dropna(subset=['inst_instid', 'indic_indicid', 'area_areaid', 'date_from', 'date_until', 'value', 'is_forecast'])
+        print("Data shape after dropping rows with missing values: ", self.data.shape)
+        # INDICATORS
+        existing_indicators_for_institution = self.__get_existing_indicators()
+        filtered_data = self.__filter_by(self.data, existing_indicators_for_institution, 'indic_indicid', 'indicid')
+        if len(filtered_data) == 0:
+            print("No data to insert for institution {self.parent_institution}. Exiting.")
+            return False
+        print("Data shape after filtering by existing indicators: ", filtered_data.shape)
+        # AREAS
         existing_areas = self.__get_existing_areas()
-        existing_indicators = self.__get_existing_indicators()
-
-        # Filter data based on existing areas
-        data_for_import = self.__filter_by(data_for_import, existing_areas, 'area_areaid', 'areaid')
-
-        # Filter data based on existing indicators
-        data_for_import = self.__filter_by(data_for_import, existing_indicators, 'indic_indicid', 'indicid')
-
-        # If no data left after filtering by areas/indicators, return False
-        if data_for_import.empty:
-            print("No data to import after area and indicator filtering.")
+        filtered_data = self.__filter_by(filtered_data, existing_areas, 'area_areaid', 'areaid')
+        if len(filtered_data) == 0:
+            print("No data to insert for institution {self.parent_institution}. Exiting.")
             return False
-        
-        # Fill NaN values
-        data_for_import['value_normalized'] = data_for_import['value_normalized'].apply(self.__fill_nan_numeric)
-        data_for_import['date_published'] = data_for_import['date_published'].apply(self.__fill_nan_date)
-
-        if existing_publications.empty:
-            return self.bulk_insert(data_for_import)
-        
-        data_for_import = data_for_import.merge(
-            existing_publications,
-            on=['inst_instid', 'indic_indicid', 'area_areaid', 'date_from', 'date_until', 'is_forecast'],
-            how='left',
-            indicator=True
-        )
-
-        # Keep only rows not present in existing publications ('left_only')
-        data_for_import = data_for_import[data_for_import['_merge'] == 'left_only'].drop(columns=['_merge'])
-
-        if data_for_import.empty:
-            print("No new data to import after publication filtering.")
+        print("Data shape after filtering by existing areas: ", filtered_data.shape)
+        # PUBLICATIONS 
+        existing_publications_df = self.__get_existing_publications_df()
+        existing_publications_df['date_from'] = pd.to_datetime(existing_publications_df['date_from'])
+        existing_publications_df['date_until'] = pd.to_datetime(existing_publications_df['date_until'])
+        filtered_data['date_from'] = pd.to_datetime(filtered_data['date_from'])
+        filtered_data['date_until'] = pd.to_datetime(filtered_data['date_until'])
+        print("Merging old and new publications.")
+        df_merged = filtered_data.merge(existing_publications_df, 
+                                        on=['inst_instid', 'indic_indicid', 'area_areaid', "date_from", "date_until"], 
+                                        how='left', 
+                                        indicator=True)
+        new_publications = df_merged[df_merged['_merge'] == 'left_only'].drop(columns='_merge').rename(
+            columns={
+                    'value_x': 'value',
+                    'value_normalized_x': 'value_normalized',
+                    'date_published_x': 'date_published',
+                    'date_updated_x': 'date_updated',
+                    'is_forecast_x': 'is_forecast',
+                    
+            })
+        if len(new_publications) == 0:
+            print("No new publications to insert. Exiting.")
             return False
-
-        # At this point, you can continue to process and insert `data_for_import` into the database.
-        print(f"Preparing to import {len(data_for_import)} new records.")
-        return self.bulk_insert(data_for_import)
-
-
-
+        print("Data shape after merging old and new publications: ", new_publications.shape)
+        final_df = new_publications[['inst_instid', 'indic_indicid', 'area_areaid', 'value', 'value_normalized', 'date_from', 'date_until', 'date_published', 'date_updated', 'is_forecast']]
+        return self.bulk_insert(final_df)
 
     @transaction.atomic
     def bulk_insert(self, new_data) -> bool:
@@ -113,8 +116,8 @@ class DataLoader:
             return None
         return value
     
-    def __filter_by(self, df: pd.DataFrame, qs: QuerySet, df_column: str, model_column) -> pd.DataFrame:
-        return self.data[self.data[df_column].isin(list(qs.values_list(model_column, flat=True)))]
+    def __filter_by(self, df: pd.DataFrame, qs: QuerySet, df_column: str, model_column: str) -> pd.DataFrame:
+        return df[df[df_column].isin(list(qs.values_list(model_column, flat=True)))]
 
     def __get_parent_institution(self, parent_institution) -> Institutions:
         try:
@@ -133,4 +136,10 @@ class DataLoader:
         qs_publications =  Publishes.objects.filter(inst_instid=self.parent_institution,
                                                     indic_indicid__in=self.__get_existing_indicators(),
                                                     area_areaid__in=self.__get_existing_areas())
-        return pd.DataFrame(qs_publications.values()).reset_index(drop=True)
+        df_publications = pd.DataFrame(qs_publications.values()).reset_index(drop=True).rename(columns={
+            'inst_instid_id': 'inst_instid',
+            'indic_indicid_id': 'indic_indicid',
+            'area_areaid_id': 'area_areaid'
+        })
+        df_publications['is_forecast'] = df_publications['is_forecast'].astype('int64')
+        return df_publications
