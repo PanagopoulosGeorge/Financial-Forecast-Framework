@@ -4,7 +4,8 @@ from django.conf import settings
 from pathlib import Path
 import requests
 from .utils import *
-
+import datetime
+from publication.models import Publishes
 OECD_ENDPOINT  = settings.ENDPOINTS['OECD']
 OECD_BASE_ENDPOINT = OECD_ENDPOINT['publications']
 OECD_HISTORICAL_ENDPOINT = OECD_ENDPOINT['historical_points']
@@ -32,10 +33,26 @@ class OECDExtractor(Extractor):
     def last_historical_date_extracted(self) -> bool:
         return write_last_historical_date(self.OECD_HISTORICAL_ENDPOINT, self.last_historical_date)
     
+    def is_up_to_date(self) -> bool:
+        try:
+            last_published = str(Publishes.objects.filter(inst_instid='OECD').latest('date_published').date_published)
+            with open(self.last_historical_date, 'r') as file:
+                last_historical_date = file.read().strip()
+            print(f"Last published: {last_published}")
+            print(f"Last historical: {last_historical_date}")
+            return last_published == last_historical_date
+        except Publishes.DoesNotExist:
+            return False
+        except Exception as e:
+            raise Exception(f"Error checking if data is up to date: {e}")
+
     def extract_publications(self) -> bool:
         self.FULL_DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
         is_historical_date_extracted = self.last_historical_date_extracted()
         if is_historical_date_extracted:
+            if self.is_up_to_date():
+                print("Data is up to date.")
+                return None
             try:
                 response = requests.get(self.BASE_URL, 
                                         allow_redirects=True, 

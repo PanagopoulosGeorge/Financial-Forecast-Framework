@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS public.publishes
     date_published date,
     date_updated date NOT NULL,
     is_forecast character(1) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT publishes_pkey PRIMARY KEY (inst_instid, indic_indicid, area_areaid, date_from, date_until, is_forecast)
+    --CONSTRAINT publishes_pkey PRIMARY KEY (inst_instid, indic_indicid, area_areaid, date_from, date_until, is_forecast)
 );
 
 ALTER TABLE IF EXISTS public.indicators

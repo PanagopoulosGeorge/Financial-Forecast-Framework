@@ -12,25 +12,13 @@ class IMFTransformer:
         self.DATA_DIR = Path(BASE_DIR / 'data' / 'imf')
         self.file_path = Path(self.DATA_DIR / 'data.json')
         self.last_historical_date_file = str(Path(BASE_DIR / 'data' / 'last_historical_date.txt'))
-        self.last_historical_quarter = open(self.last_historical_date_file).read().strip()
-        self.last_historical_date = pd.to_datetime(self.convert_quarter_to_date(self.last_historical_quarter))
+        self.last_historical_date = pd.to_datetime(open(self.last_historical_date_file).read().strip())
         self.DB_COLUMNS = ["inst_instid", "indic_indicid", "area_areaid", "value", "value_normalized", "date_from", "date_until", "date_published", "date_updated", "is_forecast"]
         self.institute = "IMF"
         self.data = pd.DataFrame()
 
     def save_data(self):
         self.data.to_csv(self.DATA_DIR / 'data_transformed.csv', index=False)
-        
-    def convert_quarter_to_date(self, quarter_str):
-        year, quarter = quarter_str.split('-Q')
-        quarter_start_month = {
-            '1': '01',
-            '2': '04',
-            '3': '07',
-            '4': '10'
-        }
-        month = quarter_start_month[quarter]
-        return f"{year}-{month}-01"
 
     def load_json(self):
         if not os.path.exists(self.file_path):
@@ -58,6 +46,7 @@ class IMFTransformer:
             data = data.assign(
                 date_until = data["date_from"] + pd.DateOffset(months=12),
                 date_updated = pd.to_datetime("now"),
+                date_published = pd.to_datetime(str(self.last_historical_date.year)+'-01-01'),
             )
             
             self.data = data.reset_index(drop=True)
@@ -67,7 +56,7 @@ class IMFTransformer:
             print(f"Error transforming data: {e}")
             return not success
 
-    def update_forecast_status(self, date=None):
+    def update_forecast_status(self, date) -> int:
         """ 
             last_historical_date.txt file contains the last date for which we have actual historical recorded data.
             returns 1 or 0 if date is greater than the last historical date in the file.
@@ -84,7 +73,7 @@ class IMFTransformer:
                 result.append({'inst_instid': 'IMF', 
                                 'indic_indicid': symbol, 
                                 'area_areaid': area, 
-                                'value': value, 'value_normalized': None, 
+                                'value': value, 'value_normalized': 0, 
                                 'date_from': date, 'date_until': None, 'date_published': None, 'date_updated': None, 
                                 'is_forecast': self.update_forecast_status(pd.to_datetime(date))})
         return pd.DataFrame(result)

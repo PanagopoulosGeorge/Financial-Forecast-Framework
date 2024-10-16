@@ -12,8 +12,7 @@ class OECDTransformer:
         self.DATA_DIR = Path(BASE_DIR / 'data' / 'oecd')
         self.file_path = Path(self.DATA_DIR / 'data.csv')
         self.last_historical_date_file = str(Path(BASE_DIR / 'data' / 'last_historical_date.txt'))
-        self.last_historical_quarter = open(self.last_historical_date_file).read().strip()
-        self.last_historical_date = pd.to_datetime(self.convert_quarter_to_date(self.last_historical_quarter))
+        self.last_historical_date = pd.to_datetime(open(self.last_historical_date_file).read().strip())
         self.DB_COLUMNS = ["inst_instid", "indic_indicid", "area_areaid", "value", "value_normalized", "date_from", "date_until", "date_published", "date_updated", "is_forecast"]
         self.column_mapping = {
             "REF_AREA": "area_areaid",
@@ -43,8 +42,8 @@ class OECDTransformer:
             df = df.assign(
                 TIME_PERIOD = pd.to_datetime(df["TIME_PERIOD"]),
                 date_until = pd.to_datetime(df["TIME_PERIOD"]) + pd.DateOffset(months=3),
-                date_published=None,
-                value_normalized=None,
+                date_published = self.last_historical_date,
+                value_normalized=0,
                 date_updated=pd.to_datetime("today"),
                 inst_instid='OECD',
                 is_forecast=None
@@ -57,27 +56,13 @@ class OECDTransformer:
             return not success
         
         self.save_data()
-        
-
         return success
         
     def save_data(self):
         self.data.to_csv(self.DATA_DIR / 'data_transformed.csv', index=False)
 
-    def convert_quarter_to_date(self, quarter_str):
-        year, quarter = quarter_str.split('-Q')
-        quarter_start_month = {
-            '1': '01',
-            '2': '04',
-            '3': '07',
-            '4': '10'
-        }
-        month = quarter_start_month[quarter]
-        return f"{year}-{month}-01"
-
     def update_forecast_status(self, date=None):
         """ last_historical_date.txt file contains the last date for which we have actual historical recorded data.
             returns 1 or 0 if date is greater than the last historical date in the file.
         """
-        
         return int(date >= self.last_historical_date)

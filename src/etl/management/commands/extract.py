@@ -10,13 +10,20 @@ class Command(BaseCommand):
 
     def extract_and_log(self, extractor):
         self.stdout.write(f"Extracting publications from endpoint {extractor.BASE_URL}")
+        self.logger.info(f"Extracting publications from endpoint {extractor.BASE_URL}")
         success = extractor.extract_publications()
+
+        if success is None:
+            self.stdout.write(self.style.SUCCESS('Data is up to date.'))
+            self.logger.info(f'Data for institution is up to date.')
+            return True
+        
         if success:
             self.stdout.write(self.style.SUCCESS(f'Publications downloaded to {extractor.FULL_DATA_PATH}'))
-            self.logger.info(self.style.SUCCESS(f'Publications downloaded to {extractor.FULL_DATA_PATH}'))
+            self.logger.info(f'Publications downloaded to {extractor.FULL_DATA_PATH}')
         else:
             self.stdout.write(self.style.ERROR('Data extraction or saving failed.'))
-            self.logger.error(self.style.ERROR('Data extraction or saving failed.'))
+            self.logger.error('Data extraction or saving failed.')
 
     def handle(self, *args, **kwargs):
         self.logger = self.setup_logger()

@@ -7,12 +7,14 @@ import logging
 DATA_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent.parent.resolve() / 'data'
 class Command(BaseCommand):
     help = 'Load CSV files from the data directory into the database'
+
     def setup_logger(self):
         return logging.getLogger('etl')
     
     def __init__(self) -> None:
         super().__init__()
         self.FILENAME = 'data_transformed.csv'
+    
     def data_for_import_exist(self, path: Path) -> bool:
         return path.exists() and path.is_file()
 

@@ -37,19 +37,12 @@ def write_last_historical_date(endpoint, out_file) -> bool:
       response = requests.post(url, headers=headers, json=payload)
       response.raise_for_status()
       data = response.json()
-      last_updated_date = data['dataflows'][-1]['lastUpdated']
+      last_updated_date = str(data['dataflows'][-1]['lastUpdated']).split('T')[0]
       print(f"Last historical date: {last_updated_date}")
-      last_quarter = compute_last_quarter(last_updated_date)
+    
       with open(out_file, 'w') as f:
-          f.write(last_quarter)
+          f.write(last_updated_date)
       return True
     except requests.exceptions.RequestException as e:
-        print(f"Request failed with status code {response.status_code}")
-        return False
-
-def compute_last_quarter(last_updated_date):
-    dt = datetime.strptime(last_updated_date, "%Y-%m-%dT%H:%M:%S.%fZ")
-    year = dt.year  
-    month = dt.month
-    last_quarter = (month - 1) // 3 + 1
-    return f"{year}-Q{last_quarter}"
+        raise Exception(f"Request failed with status code {response.status_code}")
+        
