@@ -69,6 +69,7 @@ class DataLoader:
             if not inserted:
                 print("Error inserting forecast data. Exiting.")
                 return False
+            return inserted
         else:
             print("No forecast data to insert.")
 
