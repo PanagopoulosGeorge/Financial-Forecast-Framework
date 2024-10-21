@@ -10,6 +10,7 @@ This project showcases an effort to design and develop a framework for managing 
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [License](#license)
+- [Data Sources](#data-sources)
 
 ## Installation
 
@@ -55,7 +56,7 @@ This project showcases an effort to design and develop a framework for managing 
    - Execute the scripts in the `install/postgres` folder in the following order to create the database, database user, and grant necessary privileges:
      1. **Create User**:
         - Open the PostgreSQL command line interface (psql) or any PostgreSQL client. If psql command is not recognized, add the bin folder to Path variables (eg. C:\installs\PostgreSQL\16\bin)
-           ```sh
+          ```sh
           cd install\postgres
           psql -U postgres
           ```
@@ -82,7 +83,7 @@ This project showcases an effort to design and develop a framework for managing 
           psql -U db2test -d finforecastdata
           \i '4. create_tables.sql'
           ```
-     4. **Configure the .ini file**
+     5. **Configure the .ini file**
         * Navigate to conf folder and modify the .ini file using the credentials.
 6. **Run Migrations**
 
@@ -101,7 +102,7 @@ This project showcases an effort to design and develop a framework for managing 
      ```sh
      python manage.py migrate
      ```
-7. **Import initial institutions, indicators, and geographies.**
+8. **Import initial institutions, indicators, and geographies.**
 
    - Navigate to the `src` directory after opening a terminal or cmd within Financial-Forecast-Framework folder:
      ```sh
@@ -111,20 +112,25 @@ This project showcases an effort to design and develop a framework for managing 
      ```
 
 ## Usage
+
 There are 3 main custom commands:
-  ```sh
+
+```sh
   python manage.py extract
   python manage.py transform
   python manage.py load
-  ```
+```
+
 which perform the main ETL operation.
 If you want to create a custom data source:
+
 - Create a new folder `custom` or `<name of the institution>` within `data` directory and place a file named `data_transformed.csv`. The format must follow: `(inst_instid,indic_indicid,area_areaid,value,value_normalized,date_from,date_until,date_published,date_updated,is_forecast)`
 - Register the institution if it does not currently exists through the admin site, using the superuser created.
 - run:
-    ```sh
-     python manage.py load
-     ```
+  ```sh
+   python manage.py load
+  ```
+
 ## Project Structure
 
 The system architecture is divided into 3 main components:
@@ -161,9 +167,7 @@ Based on the requirements here is a prototype of the ER diagram:
 
 ![1726680307518](images/README/1726680307518.png)
 
-
 ## License
-
 
 *MIT License*
 
@@ -174,3 +178,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+## Data Sources
+
+### OECD (API documentation [here](https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf))
+
+The \*\*OECD\*\* provides a wealth of economic data used in this project for financial forecasting. Data such as GDP growth, inflation rates, and employment statistics will be obtained using the \*\*OECD Data API\*\*, which supports RESTful queries in formats like JSON, XML, and CSV.
+
+### IMF (API documentation [here](https://www.imf.org/external/datamapper/api/help))
+
+The \*\*International Monetary Fund (IMF)\*\* is another critical data provider. The IMF offers extensive economic data through its \*\*DataMapper API\*\*, enabling retrieval of time-series data related to global economic indicators.
