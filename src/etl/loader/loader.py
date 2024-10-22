@@ -25,7 +25,7 @@ class DataLoader:
         # drop rows with missing values in the following columns
         self.data = self.data.dropna(subset=['inst_instid', 'indic_indicid', 'area_areaid', 'date_from', 'date_until', 'value', 'is_forecast'])
         print("Data shape after dropping rows with missing values: ", self.data.shape)
-        time.sleep(2)
+        time.sleep(1)
         # INDICATORS
         print(" =============== 1. Filtering by existing indicators ===============")
         existing_indicators_for_institution = self.__get_existing_indicators()
@@ -33,36 +33,36 @@ class DataLoader:
         if len(filtered_data) == 0:
             print("No data to insert for institution {self.parent_institution}. Exiting.")
             return False
-        time.sleep(2)
+        time.sleep(1)
         print("Data shape after filtering by existing indicators: ", filtered_data.shape)
         # AREAS
-        time.sleep(2)
+        time.sleep(1)
         print(" =============== 2. Filtering by existing areas ===============")
         existing_areas = self.__get_existing_areas()
         filtered_data = self.__filter_by(filtered_data, existing_areas, 'area_areaid', 'areaid')
         if len(filtered_data) == 0:
             print("No data to insert for institution {self.parent_institution}. Exiting.")
             return False
-        time.sleep(2)
+        time.sleep(1)
         print("Data shape after filtering by existing areas: ", filtered_data.shape)        
         
 
         print(" =============== 4. Separate projections from historical data  =============== ")
         historical_data = filtered_data[filtered_data['is_forecast'] == 0]
         forecast_data = filtered_data[filtered_data['is_forecast'] == 1]
-        time.sleep(2)
+        time.sleep(1)
         print("Forecasts records: ", len(forecast_data))
         print("Historical records: ", len(historical_data))
 
-        # print(" =============== 5. Inserting historical data =============== ")
-        # if len(historical_data) > 0:
-        #     inserted = self.bulk_insert(historical_data)
-        #     if not inserted:
-        #         print("Error inserting historical data. Exiting.")
-        #         return False
-        # else:
-        #     print("No historical data to insert.")
-        # time.sleep(2)
+        print(" =============== 5. Inserting historical data =============== ")
+        if len(historical_data) > 0:
+            inserted = self.bulk_insert(historical_data)
+            if not inserted:
+                print("Error inserting historical data. Exiting.")
+                return False
+        else:
+            print("No historical data to insert.")
+        time.sleep(1)
         print(" =============== 6. Inserting forecast data =============== ")
         if len(forecast_data) > 0:
             inserted = self.bulk_insert(forecast_data)

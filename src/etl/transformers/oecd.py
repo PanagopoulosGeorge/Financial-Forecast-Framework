@@ -8,8 +8,8 @@ BASE_DIR = settings.BASE_DIR
 
 class OECDTransformer:
 
-    def __init__(self):
-        self.DATA_DIR = Path(BASE_DIR / 'data' / 'oecd')
+    def __init__(self, frequency='A'):
+        self.DATA_DIR = Path(BASE_DIR / 'data' / 'oecd' / 'annual') if frequency == 'A' else Path(BASE_DIR / 'data' / 'oecd' / 'quarter')
         self.file_path = Path(self.DATA_DIR / 'data.csv')
         self.last_historical_date_file = str(Path(BASE_DIR / 'data' / 'last_historical_date.txt'))
         self.last_historical_date = pd.to_datetime(open(self.last_historical_date_file).read().strip())

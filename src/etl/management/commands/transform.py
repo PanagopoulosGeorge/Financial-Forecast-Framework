@@ -21,7 +21,10 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.logger = self.setup_logger()
 
-        oecd_transformer = OECDTransformer()
+        oecd_transformer = OECDTransformer(frequency='A')
+        self.transform_and_log(oecd_transformer)
+
+        oecd_transformer = OECDTransformer(frequency='Q')
         self.transform_and_log(oecd_transformer)
 
         imf_transformer = IMFTransformer()

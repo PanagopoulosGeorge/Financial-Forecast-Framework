@@ -179,13 +179,12 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 ## Data Sources
 
 ### OECD (API documentation [here](https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf))
 
-The \*\*OECD\*\* provides a wealth of economic data used in this project for financial forecasting. Data such as GDP growth, inflation rates, and employment statistics will be obtained using the \*\*OECD Data API\*\*, which supports RESTful queries in formats like JSON, XML, and CSV.
+The Organization for Economic Cooperation and Development (OECD) provides a wealth of economic data used in this project for financial forecasting. Data such as GDP growth, inflation rates, and employment statistics will be obtained using the \*\*OECD Data API\*\*, which supports RESTful queries in formats like JSON, XML, and CSV.
 
 ### IMF (API documentation [here](https://www.imf.org/external/datamapper/api/help))
 
-The \*\*International Monetary Fund (IMF)\*\* is another critical data provider. The IMF offers extensive economic data through its \*\*DataMapper API\*\*, enabling retrieval of time-series data related to global economic indicators.
+The International Monetary Fund (IMF)\is another critical data provider. The IMF offers extensive economic data through its \*\*DataMapper API\*\*, enabling retrieval of time-series data related to global economic indicators.

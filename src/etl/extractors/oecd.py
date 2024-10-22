@@ -25,10 +25,12 @@ class OECDExtractor(Extractor):
         self.BASE_URL = f"{OECD_BASE_ENDPOINT}/{self.country_code}.{self.indicator}.{self.frequency}"
         self.OECD_HISTORICAL_ENDPOINT = OECD_HISTORICAL_ENDPOINT
         self.ROOT_DATA_DIR = BASE_PATH / 'data'
-        self.DATA_DIR = self.ROOT_DATA_DIR / 'oecd'
+        self.DATA_DIR = self.ROOT_DATA_DIR / 'oecd' / 'annual' if self.frequency == 'A' else self.ROOT_DATA_DIR / 'oecd' / 'quarter'
         self.FULL_DATA_PATH = Path(self.DATA_DIR / 'data.csv')
         self.TIMEOUT = TIMEOUT
         self.last_historical_date = Path(self.ROOT_DATA_DIR / 'last_historical_date.txt')
+        if not self.DATA_DIR.exists():
+            self.DATA_DIR.mkdir(parents=True)
 
     def last_historical_date_extracted(self) -> bool:
         return write_last_historical_date(self.OECD_HISTORICAL_ENDPOINT, self.last_historical_date)

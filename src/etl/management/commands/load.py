@@ -22,17 +22,19 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.logger = self.setup_logger()
         data_sources = {
-                        f.name.upper(): f / self.FILENAME_FOR_LOADING
+                        f.name.upper(): [f / self.FILENAME_FOR_LOADING] if f.name != 'oecd' else [f / k / self.FILENAME_FOR_LOADING for k in f.iterdir() if k.is_dir()] 
                         for f in DATA_DIR.iterdir() if f.is_dir()}
-        print(data_sources)
-        for institution in data_sources:
+        for institution, paths in data_sources.items():
             self.logger.info(f"Loading data for {institution}")
-            if self.data_for_import_exist(data_sources[institution]):
-                loader = DataLoader(data_sources[institution], institution)
-                loaded = loader.load()
-                if loaded:
-                    os.remove(data_sources[institution])
-                    self.logger.info(f"Deleted file for {institution}")
-            else:
-                self.logger.info(f"File not found for {institution}")
+            for path in paths:
+                if self.data_for_import_exist(path):
+                    print(f"Loading data within folder {path.parent.name}")
+                    loader = DataLoader(path, institution)
+                    loaded = loader.load()
+                    if loaded:
+                        os.remove(path)
+                        self.logger.info(f"Deleted file for {institution}")
+                else:
+                    self.logger.info(f"File not found for {institution}")
+                    print(f"File not found for {institution}")
             

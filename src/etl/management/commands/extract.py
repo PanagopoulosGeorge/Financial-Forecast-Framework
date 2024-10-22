@@ -28,8 +28,11 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.logger = self.setup_logger()
     
-        oecd_extractor = OECDExtractor(country_code="all", indicator="all", frequency="A", data_download="full")
+        oecd_extractor = OECDExtractor(country_code="all", indicator="all", frequency="Q", data_download="2010")
         self.extract_and_log(oecd_extractor)
-        
+
+        oecd_extractor = OECDExtractor(country_code="all", indicator="all", frequency="A", data_download="2010")
+        self.extract_and_log(oecd_extractor)
+
         imf_extractor = IMFExtractor()
         self.extract_and_log(imf_extractor)
